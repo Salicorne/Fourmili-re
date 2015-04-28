@@ -19,15 +19,19 @@ public class Fourmi{
 	 * @param pf sa position
 	 * ***********************************************/
 	public Fourmi(Pos pf){
-		// TODO
+		this.p = pf;
+		this.charge = false;
+		this.couleur = COULEURVIDE;
 	}
-
+	
 	/**************************************************************
 	 * constructeur qui cr�� une fourmi de base sans nourriture
 	 * � une position al�atoire
 	 * ***********************************************/
 	public Fourmi(){
-		// TODO
+		this.p = new Pos((int)(Math.random()*600),(int)(Math.random()*600));
+		this.charge = false;
+		this.couleur = COULEURVIDE;
 	}
 	/*************************************************
 	 * transforme en String
@@ -70,5 +74,6 @@ public class Fourmi{
 	public void bouge(){
 		//TODO
 	}//bouge
+	
 }
 

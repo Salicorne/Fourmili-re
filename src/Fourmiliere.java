@@ -28,6 +28,8 @@ public class Fourmiliere{
        Fourmi f2= new Fourmi(new Pos(400,400));
        Fourmi f3= new Fourmi();
        f1.seMontre();
+       f2.seMontre();
+       f3.seMontre();
        System.out.println(f1+"    "+zone.getQuantite(p1));
        f1.prend();
        System.out.println(f1+"    "+zone.getQuantite(p1));
