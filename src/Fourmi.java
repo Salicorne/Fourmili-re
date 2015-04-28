@@ -62,7 +62,8 @@ public class Fourmi{
 	 * change de couleur
 	 * ********************************************************************/
 	public void prend(){
-		//TODO
+		this.charge = true;
+		this.couleur = COULEURCHARGE;
 	}
 	/*******************************************************************
 	 * avance de fa�on al�atoire sur une des 8 positions voisines :
@@ -71,8 +72,15 @@ public class Fourmi{
 	 *  si la fourmi est charg�e et sa position sur le nid =>pose la nourriture
 	 *  la position change
 	 * *********************************************************************/
-	public void bouge(){
-		//TODO
+	public void bouge(Zone Monde){
+		Pos Nouvelle = this.p.posVoisine();
+		if(Monde.posValide(Nouvelle))
+		{
+			this.sEfface();
+			this.p = Nouvelle;
+			this.seMontre();
+		}
+		
 	}//bouge
 	
 }

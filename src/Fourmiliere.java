@@ -35,11 +35,12 @@ public class Fourmiliere{
        System.out.println(f1+"    "+zone.getQuantite(p1));
        f1.seMontre();
        System.out.println(f1+"-"+f2+"-"+f3);
-       for(int i=0; i<1000;i++){
-         f1.bouge();
-         f2.bouge();
-         f3.bouge();
-       }
+       for(int i=0; i<1000000;i++){
+
+    	 f1.bouge(zone);
+         f2.bouge(zone);
+         f3.bouge(zone);}
+
        System.out.println(f1+"-"+f2+"-"+f3);
        System.out.println(f1);
     }
