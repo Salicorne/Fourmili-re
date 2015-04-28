@@ -74,12 +74,19 @@ public class Fourmi{
 	 * *********************************************************************/
 	public void bouge(Zone Monde){
 		Pos Nouvelle = this.p.posVoisine();
-		if(Monde.posValide(Nouvelle))
+		while(!Monde.posValide(Nouvelle))
 		{
-			this.sEfface();
-			this.p = Nouvelle;
-			this.seMontre();
+			Nouvelle = this.p.posVoisine();
 		}
+		if(Monde.getQuantite(Nouvelle)>0 && !this.charge)
+		{
+				this.prend();
+				Monde.diminue(Nouvelle);
+
+		}
+		this.sEfface();
+		this.p = Nouvelle;
+		this.seMontre();
 		
 	}//bouge
 	
