@@ -1,7 +1,7 @@
 import java.awt.Color;
 /**
- * La classe Colonie contient toutes les fourmis pr�sentes
- * dans la fourmili�re dans cette version il ya des fourmiDir
+ * La classe Colonie contient toutes les fourmis prï¿½sentes
+ * dans la fourmiliï¿½re dans cette version il ya des fourmiDir
  * et des fourmiPhero
  * *********************************************************/
 public class Colonie{
@@ -11,22 +11,22 @@ public class Colonie{
   private int quantiteNid;
  
    /*************************************************************
-    * constructeur Colonie qui cr�e un ensemble de fourmis 
-    * avec une position donn�e  : le Nid 
+    * constructeur Colonie qui crï¿½e un ensemble de fourmis 
+    * avec une position donnï¿½e  : le Nid 
     * @param p la position du nid
     * @param taille  le nombre de fourmis
     * **********************************************************/
   public Colonie(Pos p,int taille){
-	  //TODO
-	  if(taille>0) {
-		  this.population = new Fourmi[taille];
-		  for(int i = 0;i<taille;i++) {
-			  this.population[i] = new Fourmi(p);
-		  }
-	  }
-	  this.nb = taille;
-	  this.pNid = p;
-	  this.quantiteNid = 0;	//Pas encore de nourriture dans le nid ?
+          //TODO
+          if(taille>0) {
+                  this.population = new Fourmi[taille];
+                  for(int i = 0;i<taille;i++) {
+                          this.population[i] = new Fourmi(this, p);
+                  }
+          }
+          this.nb = taille;
+          this.pNid = p;
+          this.quantiteNid = 0;        //Pas encore de nourriture dans le nid ?
   }
    /***********************************************************************
     * rend la position du Nid
@@ -37,50 +37,56 @@ public class Colonie{
    }
   
   /***********************************************************************
-    * teste si une position correspond � la position du Nid
-    * @param p  la position � tester
+    * teste si une position correspond ï¿½ la position du Nid
+    * @param p  la position ï¿½ tester
     * @return vrai si OK
     * ********************************************************************/
     public boolean estNid(Pos p){
       return p.equals(pNid);
     }  
    /**********************************************************************
-    * ajoute une unit� de nourriture dans le nid
+    * ajoute une unitï¿½ de nourriture dans le nid
     * *****************************************************************/
     public void poseNid(){
       this.quantiteNid++;
     }
     
    /********************************************************
-    *  affiche le nid  sur le terrain carr� Jaune
-    * la taille augmente avec la quantit� de nourriture
+    *  affiche le nid  sur le terrain carrï¿½ Jaune
+    * la taille augmente avec la quantitï¿½ de nourriture
     * *******************************************************/ 
    private void montreLeNid(){
-     int cote = 3+(quantiteNid/20);
+     int cote = 10+(quantiteNid/20);
      Fourmiliere.afficheur.carreCentre(this.pNid.cx(),this.pNid.cy(),cote,Color.YELLOW);
    }
    /***********************************************************
     * La colonie se bouge d'un pas
     * ************************************************************/
   public void bouge(Zone z){
-	  //TODO
-	  if(this.nb > 0) {
-		  for(int i = 0;i<this.nb;i++) {
-			  this.population[i].bouge(z);
-		  }
-	  }
+          //TODO
+          if(this.nb > 0) {
+                  for(int i = 0;i<this.nb;i++) {
+                          this.population[i].bouge(z);
+                          if(this.estNid(this.population[i].p)) {
+                                  this.poseNid();
+                                  this.population[i].lache();
+                          }
+                  }
+                  this.montreLeNid();
+          }
   }
     /***********************************************************
     * La colonie se bouge de n pas 
     * @param n le nombre de pas
     * ************************************************************/
  public void bouge(Zone z, int n){
-	 //TODO
-	 if(this.nb > 0) {
-		 for(int i = 0;i<n;i++) {
-			 this.bouge(z);
-		 }
-	 }
+         //TODO
+         if(this.nb > 0) {
+                 for(int i = 0;i<n;i++) {
+                         this.bouge(z);
+                         System.out.println(this.quantiteNid);
+                 }
+         }
  }
 
   /**********************************************************
@@ -95,7 +101,7 @@ public class Colonie{
   }
   
    /**********************************************************
-    * Affiche la colonie sur l'�cran graphique 
+    * Affiche la colonie sur l'ï¿½cran graphique 
     * *******************************************************/
   public void seMontre(){
      for(int i=0; i<this.nb; i++){
@@ -105,3 +111,4 @@ public class Colonie{
   }
 }
       
+
