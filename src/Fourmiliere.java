@@ -13,35 +13,22 @@ public class Fourmiliere{
    * ***********************************************************/
    public static Afficheur afficheur =  new Afficheur(601,601,"Fourmiliere ");
    public static void main(String[] args){
-       zone = new Zone(600);
-       Pos p1 = new Pos(500,520);
-       Pos p2 = new Pos(400,320);
+       zone = new Zone(500);
+       Pos p1 = new Pos(200,220);
+       Pos p2 = new Pos(250,240);
+       Pos p3 = new Pos(160,180); 
+       Pos pNid = new Pos(200,200);
        zone.metTas(p1);
        zone.metTas(p2);
-       zone.metTas(p2);
-       zone.seMontre();     
-       zone.diminue(p1);
-       zone.diminue(p1);
-       System.out.println(zone.getQuantite(p1));
-       System.out.println(zone);
-       Fourmi f1= new Fourmi(p1);
-       Fourmi f2= new Fourmi(new Pos(400,400));
-       Fourmi f3= new Fourmi();
-       f1.seMontre();
-       f2.seMontre();
-       f3.seMontre();
-       System.out.println(f1+"    "+zone.getQuantite(p1));
-       f1.prend();
-       System.out.println(f1+"    "+zone.getQuantite(p1));
-       f1.seMontre();
-       System.out.println(f1+"-"+f2+"-"+f3);
-       for(int i=0; i<1000000;i++){
-
-    	 f1.bouge(zone);
-         f2.bouge(zone);
-         f3.bouge(zone);}
-
-       System.out.println(f1+"-"+f2+"-"+f3);
-       System.out.println(f1);
+       zone.metTas(p3);
+       zone.seMontre();
+       Colonie c = new Colonie(pNid,500);
+       System.out.println(c);
+       c.bouge(zone, 1000);
+       c.seMontre();
+       System.out.println(c);
+	   //Tests textuels : 
+	   Pos pp1 = new Pos(200, 200);
+	   
     }
 }

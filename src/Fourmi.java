@@ -19,17 +19,19 @@ public class Fourmi{
 	 * @param pf sa position
 	 * ***********************************************/
 	public Fourmi(Pos pf){
+		// DONE
 		this.p = pf;
 		this.charge = false;
 		this.couleur = COULEURVIDE;
 	}
-	
+
 	/**************************************************************
 	 * constructeur qui crï¿½ï¿½ une fourmi de base sans nourriture
 	 * ï¿½ une position alï¿½atoire
 	 * ***********************************************/
 	public Fourmi(){
-		this.p = new Pos((int)(Math.random()*600),(int)(Math.random()*600));
+		// DONE
+		this.p = new Pos((int)(Math.random()*600), (int)(Math.random()*600));
 		this.charge = false;
 		this.couleur = COULEURVIDE;
 	}
@@ -62,6 +64,7 @@ public class Fourmi{
 	 * change de couleur
 	 * ********************************************************************/
 	public void prend(){
+		//DONE
 		this.charge = true;
 		this.couleur = COULEURCHARGE;
 	}
@@ -72,23 +75,22 @@ public class Fourmi{
 	 *  si la fourmi est chargï¿½e et sa position sur le nid =>pose la nourriture
 	 *  la position change
 	 * *********************************************************************/
-	public void bouge(Zone Monde){
-		Pos Nouvelle = this.p.posVoisine();
-		while(!Monde.posValide(Nouvelle))
-		{
-			Nouvelle = this.p.posVoisine();
-		}
-		if(Monde.getQuantite(Nouvelle)>0 && !this.charge)
-		{
-				this.prend();
-				Monde.diminue(Nouvelle);
-
+	public void bouge(Zone z){
+		//DONE
+		Pos newp = this.p.posVoisine();	//aléatoire
+		while(!z.posValide(newp)) {
+			newp = this.p.posVoisine();
 		}
 		this.sEfface();
-		this.p = Nouvelle;
+		this.p = newp;
+		
+		if(z.getQuantite(this.p) != 0 && this.charge == false) {
+			z.diminue(this.p);
+			this.prend();
+		}
+		
 		this.seMontre();
 		
 	}//bouge
-	
 }
 
