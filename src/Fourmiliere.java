@@ -13,20 +13,28 @@ public class Fourmiliere{
    * ***********************************************************/
    public static Afficheur afficheur =  new Afficheur(601,601,"Fourmiliere ");
    public static void main(String[] args){
-       zone = new Zone(500);
-       Pos p1 = new Pos(250,250);
-       Pos p2 = new Pos(320,320);
-       Pos p3 = new Pos(270,320); 
-       Pos pNid = new Pos(300,300);
+       zone = new Zone(600);
+       Pos p1 = new Pos(200,320);
+       Pos p2 = new Pos(250,240);
+       Pos p3 = new Pos(360,380); 
+       Pos pNid1 = new Pos(300,300);
+       Pos pNid2 = new Pos(200,400);
        zone.metTas(p1);
        zone.metTas(p2);
        zone.metTas(p3);
        zone.seMontre();
-       Colonie c = new Colonie(pNid,100);
-       System.out.println(c);
-       while(true){
-       c.bouge(zone);
-       c.seMontre();
-       System.out.println(c); }
+       Colonie c1 = new Colonie(pNid1,500);
+       System.out.println(c1);
+       c1.bouge(zone, 1000);
+       c1.seMontre();
+       System.out.println(c1); 
+       Colonie c2 = new Colonie(pNid2,800);
+       
+       for(int i=0;i<2000;i++){
+         c1.bouge(zone);
+         c2.bouge(zone);
+         c1.seMontre();
+         c2.seMontre();
+       }
     }
 }

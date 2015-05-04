@@ -91,18 +91,32 @@ public class Fourmi{
                 
                 if(this.charge == true) {
                         this.bougeCharge(z);
-                }else{
-                        this.bougeVide(z);
                 }
+                else{
+                        if(z.getQuantite(this.p) < 0)
+                        {this.BougePheromone(z);}
+                        else
+                        {this.bougeVide(z);
+                        }}
                 
                 
         }//bouge
         
+        public void BougePheromone(Zone z)
+        {
+            this.sEfface();
+            this.dir = new Dir(-1*(z.getQuantite(this.p)+1));
+            this.p = new Pos(this.p.cx()+this.dir.dx(), this.p.cy()+this.dir.dy()); //On suppose que pos est valide...
+            this.seMontre();
+        }
+        
         public void bougeCharge(Zone z) {
                 //On rentre au nid ! 
                 this.sEfface();
-                this.dir = new Dir(this.p, this.colonie.getPNid());
-                this.p = new Pos(this.p.cx()+this.dir.dx(), this.p.cy()+this.dir.dy()); //On suppose que pos est valide...
+                this.dir = new Dir(this.p, this.colonie.getPNid());      
+                this.p = new Pos(this.p.cx()+this.dir.dx(), this.p.cy()+this.dir.dy());
+                z.posePhero(this.p, this.dir.dirOppose());
+                //On suppose que pos est valide...
                 this.seMontre();
         }
         
@@ -116,10 +130,10 @@ public class Fourmi{
                 this.dir = new Dir(this.p, newp);
                 this.p = newp;
                 //On regarde si on trouve de la nourriture
-                if(z.getQuantite(this.p) > 0 && this.charge == false) {        
+                if(z.getQuantite(this.p) > 0) {        
                         z.diminue(this.p);
                         this.prend();
-                }
+                }                	
                 this.seMontre();
         }
 }
