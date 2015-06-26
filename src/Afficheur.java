@@ -92,7 +92,6 @@ public ImagePanel() {
    * ***************************************************************/
  public void pixel(int x, int y, Color c) {
   image.setRGB(x,y,c.getRGB());
-
   repaint();
  }
  

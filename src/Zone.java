@@ -12,7 +12,9 @@ public class Zone {
   private int [][] t; // le territoire des fourmis
   private int dim;      // la dimension du territoire
   private Pos[] lesTas = new Pos[TASMAX]; // les tas de nourriture
+  private Pos[] lesMurs = new Pos[20];
   private int nbTas = 0; // le nombre de tas
+  private int nbMurs = 0; // le nombre de murs
   
   /*************************************************
    * constructeur de la Zone 
@@ -47,7 +49,7 @@ public class Zone {
     * @return vrai si OK
     * ********************************************************************/
   public boolean posValide(Pos p){
-    return (p.cx()>0 && p.cx()<t.length && p.cy()>0 && p.cy()<t.length) ;
+    return (p.cx()>0 && p.cx()<t.length && p.cy()>0 && p.cy()<t.length && this.getQuantite(p) != -10) ;
    }
 
    /********************************************************
@@ -63,6 +65,18 @@ public class Zone {
     }//for i
     lesTas[nbTas]=p;
     nbTas++;
+  }
+  
+  public void metMur(Pos p) { //On met un mur et on le montre
+	  int R = COTETAS/2;
+	    for(int i=p.cx()-R;i<=p.cx()+R-1;i++){
+	      for(int j=p.cy()-R;j<=p.cy()+R-1;j++){
+	        t[i][j]=-10;
+	        Fourmiliere.afficheur.pixel(i, j, 0, 128, 255);
+	      }//for j
+	    }//for i
+	   lesMurs[nbMurs] = p;
+	   nbMurs++;
   }
  
    /***********************************************************************
@@ -94,6 +108,15 @@ public class Zone {
         }//for j
       }//for i
   }
+  
+  private void montreLeMur(Pos p) {
+	  int R=COTETAS/2;
+      for(int i=p.cx()-R;i<=p.cx()+R-1;i++){
+        for(int j=p.cy()-R;j<=p.cy()+R-1;j++){
+          Fourmiliere.afficheur.pixel(i,j,0,255,255);
+        }//for j
+      }//for i
+  }
 
    /**************************************************************
      * affiche sur le terrain les tas (plus tard les obstacles)
@@ -103,6 +126,10 @@ public class Zone {
       Pos p = lesTas[k];
        montreLeTas(p);
      }
+    for(int i = 0;i<this.nbMurs;i++) {
+    	Pos p = lesMurs[i];
+    	montreLeMur(p);
+    }
    }
    /***************************************************************
     * transforme en String la Zone : dimension - nid - tas 
@@ -121,7 +148,7 @@ public class Zone {
       * @param d la direction
       * *****************************************************************/
     public void posePhero(Pos p, int d){
-      t[p.cx()][p.cy()]= - (d+1);//-1 ï¿½ -8 pb si 0
+      t[p.cx()][p.cy()]= - (d+1);//-1 à -8 pb si 0
     }
 }
 
